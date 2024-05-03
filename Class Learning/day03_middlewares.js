@@ -2,42 +2,42 @@ const express = require("express");
 const app = express();
 
 // //-----------1st method for middlewares--------------
-// app.use(logger);
+app.use(logger);
 
-// app.get("/users" , (req, res) => {
-//     console.log("user 1 start");
-//     return res.send({route : "User_01", role : req.role})
-// })
+app.get("/users" , (req, res) => {
+    console.log("user 1 start");
+    return res.send({route : "User_01", role : req.role})
+})
 
-// app.get("/student", (req, res) => {
-//     return res.send({route : "Student_01", role : req.role})
-// })
+app.get("/student", (req, res) => {
+    return res.send({route : "Student_01", role : req.role})
+})
 
-// function logger(req , res, next){             // ==> This  is middleware function
-//     if(req.path == "/users"){
-//         req.role = "user"
-//     }
-//     else if(req.path == "/student"){
-//         req.role = "student"
-//     }
-//     else{
-//         req.role = "someBody"
-//     }
-//     next();
-// }
+function logger(req , res, next){             // ==> This  is middleware function
+    if(req.path == "/users"){
+        req.role = "user"
+    }
+    else if(req.path == "/student"){
+        req.role = "student"
+    }
+    else{
+        req.role = "someBody"
+    }
+    next();
+}
 
 
 
-// //-----------2nd method for middlewares--------------
-// app.get('/admin' , admin , (req, res) => {
-//     return res.send( {admin : "Admin_01", role : req.role} )
-// });
+//-----------2nd method for middlewares--------------
+app.get('/admin' , admin , (req, res) => {
+    return res.send( {admin : "Admin_01", role : req.role} )
+});
 
-// function admin(req, res, next){
-//     console.log("Admin middleware");
-//     next();
-//     console.log("After admin Middleware");
-// }
+function admin(req, res, next){
+    console.log("Admin middleware");
+    next();
+    console.log("After admin Middleware");
+}
 
 
 
