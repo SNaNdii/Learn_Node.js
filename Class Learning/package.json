@@ -2,16 +2,16 @@
   "name": "class-learning",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "day02_index.js",
   "scripts": {
-    "start": "nodemon middlewares.js"
+    "start": "nodemon day06_relation.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2",
-    "mongoose": "^8.3.3",
+    "mongoose": "^8.3.4",
     "nodemon": "^3.1.0"
   }
 }
