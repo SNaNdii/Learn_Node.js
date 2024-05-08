@@ -151,6 +151,16 @@ app.delete("/comments/:id", async(req, res) => {
     }
 })
 
+
+//--------------------------CRUD - comment read------------------------------------
+// app.get("/posts/:id/comments", async(req, res) => {
+//     try{
+//         const comments = await Post.find({id : req.params.id}).lean().exec();
+//         return res.status(201).send({comments : comments})
+//     }catch(err){
+//         return res.status(500).send({message : err.message})
+//     }
+// })
 //--------------------------Port Setup------------------------------------
 app.listen(6000, () => {
     connect();
