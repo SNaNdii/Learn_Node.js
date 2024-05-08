@@ -4,7 +4,7 @@
   "description": "",
   "main": "day02_index.js",
   "scripts": {
-    "start": "nodemon day06_relation.js"
+    "start": "nodemon day07_expressMVC.js"
   },
   "keywords": [],
   "author": "",
