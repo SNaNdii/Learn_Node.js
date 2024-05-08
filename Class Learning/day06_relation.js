@@ -172,6 +172,46 @@ app.delete("/post/:id", async(req, res) => {
     }
 })
 
+//--------Comments CRUD-----------
+app.post("/comments", async(req, res) => {
+    try{
+        const comment = await Comment.create(req.body);
+        return res.status(201).send({comment : comment});
+    }
+    catch(err){
+        return res.status(500).send({message : err.message});
+    }
+})
+
+app.get("/comments", async(req, res) => {
+    try{
+        const comments = await Comment.find().lean().exec();
+        return res.status(201).send({comments : comments});
+    }
+    catch(err){
+        return res.status(500).send({message : err.message});
+    }
+})
+
+app.patch("/comments/:id", async(req, res) => {
+    try{
+        const comment = await Comment.findByIdAndUpdate(req.params.id , req.body, {new : true});
+        return res.status(201).send({comment : comment});
+    }
+    catch(err){
+        return res.status(500).send({message : err.message});
+    }
+})
+
+app.delete("/comments/:id", async(req, res) => {
+    try{
+        const comment = await Comment.findByIdAndDelete(req.params.id);
+        return res.status(201).send({comment : comment});
+    }
+    catch(err){
+        return res.status(500).send({message : err.message});
+    }
+})
 
 app.listen(5000, () => {
     connect();
