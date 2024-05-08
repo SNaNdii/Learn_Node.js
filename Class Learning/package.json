@@ -4,13 +4,14 @@
   "description": "",
   "main": "day02_index.js",
   "scripts": {
-    "start": "nodemon day07_expressMVC.js"
+    "start": "nodemon day07_relation.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2",
+    "mongodb": "^6.6.1",
     "mongoose": "^8.3.4",
     "nodemon": "^3.1.0"
   }
