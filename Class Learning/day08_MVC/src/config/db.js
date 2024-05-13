@@ -1,8 +1,5 @@
-const express = require("express")
-const app = express();
-app.use(express.json());
-
 const mongoose = require("mongoose");
+
 const connect = () => {
     try{
         mongoose.connect("mongodb://127.0.0.1:27017/CommentApp_02");
@@ -11,3 +8,5 @@ const connect = () => {
         console.log("Error in MongoDDB Connection")
     }
 }
+
+module.exports = connect;
