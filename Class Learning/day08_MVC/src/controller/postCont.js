@@ -1,44 +1,13 @@
 const express = require("express")
-const app = express();
-app.use(express.json());
+const router = express.Router();
+router.use(express.json());
 
 const Post = require("../model/postModel");
+const crudController = require("../controller/crudCont")
 
-app.post("/", async(req, res) => {
-    try{
-        const post = await Post.create(req.body);
-        return res.status(201).send({post : post})
-    }
-    catch(err){
-        return res.status(500).send({message : err.message})
-    }
-})
-app.get("/", async(req, res) => {
-    try{
-        const post = await Post.find().populate("userId").lean().exec();
-        return res.status(201).send({post : post})
-    }
-    catch(err){
-        return res.status(500).send({message : err.message})
-    }
-})
-app.patch("/:id", async(req, res) => {
-    try{
-        const post = await Post.findByIdAndUpdate(req.params.id , req.body, {new: true}).lean().exec();
-        return res.status(201).send({post : post})
-    }
-    catch(err){
-        return res.status(500).send({message : err.message})
-    }
-})
-app.delete("/:id", async(req, res) => {
-    try{
-        const post = await Post.findByIdAndDelete(req.params.id).lean().exec();
-        return res.status(201).send({post : post})
-    }
-    catch(err){
-        return res.status(500).send({message : err.message})
-    }
-})
+router.post("/", crudController.post(Post));
+router.get("/", crudController.get(Post));
+router.patch("/:id", crudController.patch(Post));
+router.delete("/:id", crudController.deleteOne(Post));
 
-module.exports = app;
+module.exports = router;
