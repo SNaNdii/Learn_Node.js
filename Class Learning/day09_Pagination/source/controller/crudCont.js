@@ -1,17 +1,36 @@
+const transport = require("../configuration/mail")
+
 const getController = (model) => async(req, res) => {
     try{
-        const item = await model.find().lean().exec();
+        const page = req.query.page;
+        const pagesize = req.query.pagesize || 10;
+        const skipItems = (page - 1) * pagesize;
+
+        const item = await model.find().skip(skipItems).limit(pagesize).lean().exec();
+
         return res.status(201).send({item : item});
     }catch(err){
-        return res.status(500).send({message : errr.message});
+        return res.status(500).send({message : err.message});
     }
     
 }
 
 const postController = (model) => async(req, res) => {
     try{
+        
         const item = await model.create(req.body);
-        return res.status(201).send({item : item});
+
+        transport.sendMail(
+            {
+                from: '"Admin" <admin@osource.com>', // sender address
+                to: item.sellerMail, // list of receivers
+                subject: "Welcome to the DataBase", // Subject line
+                text: `Hello, Thank you for connecting with us`, // plain text body
+                html: `<b>Hello, Thank you for connecting with us</b>`, // html body
+            }
+        );
+
+        return res.status(201).send({message : "User Deatals Uploaded Successfully"});
 
     }catch(err){
          return res.status(402).send({message : err.message});   
