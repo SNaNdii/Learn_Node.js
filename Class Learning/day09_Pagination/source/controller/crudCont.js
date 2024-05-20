@@ -17,19 +17,16 @@ const getController = (model) => async(req, res) => {
 
 const postController = (model) => async(req, res) => {
     try{
-        
         const item = await model.create(req.body);
-
         transport.sendMail(
             {
-                from: '"Admin" <admin@osource.com>', // sender address
-                to: item.sellerMail, // list of receivers
-                subject: "Welcome to the DataBase", // Subject line
-                text: `Hello, Thank you for connecting with us`, // plain text body
-                html: `<b>Hello, Thank you for connecting with us</b>`, // html body
+                from: '"Admin" <admin@osource.com>',
+                to: item.sellerMail,
+                subject: "Welcome to the DataBase",
+                text: `Hello ${item.name}, Thank you for connecting with us`,
+                html: `<b>Hello ${item.name}, Thank you for connecting with us</b>`,
             }
         );
-
         return res.status(201).send({message : "User Deatals Uploaded Successfully"});
 
     }catch(err){
